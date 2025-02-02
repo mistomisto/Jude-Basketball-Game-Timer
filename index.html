@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown to the hornet's next game!!!!!!!</title>
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Gotham Medium', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: #008080;
+            background-image: 
+                linear-gradient(90deg, rgba(255, 255, 255, 0.2) 4px, transparent 4px);
+            background-size: 100px 100%;
+            color: #fff;
+        }
+
+        .logo {
+            width: 250px;
+            height: auto;
+            margin-bottom: 2rem;
+        }
+
+        .container {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(0, 128, 128, 0.8);
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        #mode {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+
+        #timer {
+            font-size: 4rem;
+            margin: 2rem 0;
+            font-weight: 300;
+        }
+
+        .button-container {
+            margin-top: 2rem;
+        }
+
+        button {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: #fff;
+            padding: 1rem 3rem;
+            font-size: 1.2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-family: inherit;
+        }
+
+        button:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <img src="https://upload.wikimedia.org/wikipedia/en/c/c4/Charlotte_Hornets_%282014%29.svg" alt="Charlotte Hornets Logo" class="logo">
+        <div id="mode">Countdown to the Hornet's next game!!!!</div>
+        <div id="timer">Click Start to begin countdown</div>
+        <div class="button-container" style="grid-template-columns: 1fr;">
+            <button id="start">START COUNTDOWN</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html> 
