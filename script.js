@@ -37,4 +37,31 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Initial display
-document.getElementById('timer').innerHTML = "Click Start to begin countdown"; 
+document.getElementById('timer').innerHTML = "Click Start to begin countdown";
+
+document.getElementById('startButton').addEventListener('click', function() {
+    // Set the target date (February 8, 2025 1:15 PM EST)
+    const targetDate = new Date('2025-02-08T13:15:00-05:00');
+    
+    // Update countdown every second
+    const countdown = setInterval(function() {
+        const now = new Date();
+        const timeLeft = targetDate - now;
+
+        // Calculate time components
+        const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+        // Display the countdown
+        document.getElementById('countdown').innerHTML = 
+            `${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds until game time!`;
+
+        // Stop countdown if target date is reached
+        if (timeLeft < 0) {
+            clearInterval(countdown);
+            document.getElementById('countdown').innerHTML = "Game Time!";
+        }
+    }, 1000); // Update every second
+}); 
