@@ -1,67 +1,127 @@
 console.log("Script loaded!");
 
-document.addEventListener('DOMContentLoaded', () => {
+// Global variable to store the interval
+let countdownInterval;
+
+// Function to update the countdown
+function updateCountdown() {
+    // Get the countdown element
+    const countdownElement = document.getElementById('countdown');
+    
+    // Set target date
+    const targetDate = new Date('2025-02-08T13:15:00-05:00');
+    const now = new Date();
+    const timeLeft = targetDate - now;
+
+    // Calculate all time components
+    const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+    // Create the display text
+    const displayText = `
+        <div class="time-segment">
+            <div class="time-value">${String(days).padStart(2, '0')}</div>
+            <div class="time-label">Days</div>
+        </div>
+        <div class="time-segment">
+            <div class="time-value">${String(hours).padStart(2, '0')}</div>
+            <div class="time-label">Hours</div>
+        </div>
+        <div class="time-segment">
+            <div class="time-value">${String(minutes).padStart(2, '0')}</div>
+            <div class="time-label">Minutes</div>
+        </div>
+        <div class="time-segment">
+            <div class="time-value">${String(seconds).padStart(2, '0')}</div>
+            <div class="time-label">Seconds</div>
+        </div>
+    `;
+
+    // Update the display
+    countdownElement.innerHTML = displayText;
+}
+
+// Wait for the page to load
+window.onload = function() {
+    // Get the start button
     const startButton = document.getElementById('start');
-    const timerDisplay = document.getElementById('timer');
-    const modeDisplay = document.getElementById('mode');
+    const countdownElement = document.getElementById('countdown');
     
-    // Next game date (you'll need to update this for each game)
-    const nextGameDate = new Date('2024-04-14T19:00:00'); // Example date - adjust as needed
-    
-    let countdownInterval;
-    
-    function updateCountdown() {
-        const now = new Date();
-        const timeLeft = nextGameDate - now;
+    // Add click handler
+    startButton.onclick = function() {
+        // Hide the button
+        startButton.style.display = 'none';
         
-        if (timeLeft <= 0) {
-            timerDisplay.textContent = "Game Time!";
+        // Hide the button container
+        const buttonContainer = document.querySelector('.button-container');
+        if (buttonContainer) {
+            buttonContainer.style.display = 'none';
+        }
+
+        // Show the countdown
+        countdownElement.style.display = 'grid';
+
+        // Clear any existing interval
+        if (countdownInterval) {
             clearInterval(countdownInterval);
-            startButton.disabled = true;
-            return;
         }
         
-        const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+        // Start the countdown
+        updateCountdown();
         
-        timerDisplay.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-    }
-    
-    startButton.addEventListener('click', () => {
-        updateCountdown(); // Initial call
+        // Update every second
         countdownInterval = setInterval(updateCountdown, 1000);
-        startButton.disabled = true;
-    });
-});
+    };
+};
 
 // Initial display
 document.getElementById('timer').innerHTML = "Click Start to begin countdown";
 
-document.getElementById('startButton').addEventListener('click', function() {
-    // Set the target date (February 8, 2025 1:15 PM EST)
-    const targetDate = new Date('2025-02-08T13:15:00-05:00');
+// First, let's make sure we're running after the DOM loads
+window.onload = function() {
+    // Get our elements
+    const startButton = document.querySelector('#start');
+    const countdownDiv = document.querySelector('#countdown');
     
-    // Update countdown every second
-    const countdown = setInterval(function() {
-        const now = new Date();
-        const timeLeft = targetDate - now;
+    // Log what we found
+    console.log('Start button:', startButton);
+    console.log('Countdown div:', countdownDiv);
 
-        // Calculate time components
-        const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+    // Only proceed if we found both elements
+    if (!startButton || !countdownDiv) {
+        console.error('Could not find required elements');
+        console.log('HTML content:', document.body.innerHTML);
+        return;
+    }
 
-        // Display the countdown
-        document.getElementById('countdown').innerHTML = 
-            `${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds until game time!`;
-
-        // Stop countdown if target date is reached
-        if (timeLeft < 0) {
-            clearInterval(countdown);
-            document.getElementById('countdown').innerHTML = "Game Time!";
+    // Add click handler
+    startButton.onclick = function() {
+        console.log('Button clicked');
+        
+        // Test with simple content first
+        countdownDiv.textContent = 'Testing...';
+        
+        // Set up the countdown
+        const targetDate = new Date('2025-02-08T13:15:00-05:00');
+        
+        function updateTime() {
+            const now = new Date();
+            const timeLeft = targetDate - now;
+            
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+            
+            countdownDiv.textContent = `${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`;
         }
-    }, 1000); // Update every second
-}); 
+        
+        // Update immediately
+        updateTime();
+        
+        // Then update every second
+        setInterval(updateTime, 1000);
+    };
+}; 

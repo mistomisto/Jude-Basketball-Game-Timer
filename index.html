@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Countdown to the hornet's next game!!!!!!!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
         body {
             margin: 0;
@@ -27,11 +29,12 @@
 
         .container {
             text-align: center;
-            padding: 2rem;
+            padding: 3rem;
             background: rgba(0, 128, 128, 0.8);
             border-radius: 15px;
             backdrop-filter: blur(5px);
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            min-width: 800px;
         }
 
         #mode {
@@ -41,9 +44,40 @@
         }
 
         #timer {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+
+        #countdown {
+            display: none;
+            font-family: 'Orbitron', sans-serif;
             font-size: 4rem;
             margin: 2rem 0;
-            font-weight: 300;
+            padding: 2rem;
+            border-radius: 15px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .time-segment {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .time-value {
+            font-size: 6rem;
+            font-weight: bold;
+            color: #00ff00;
+            text-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
+        }
+
+        .time-label {
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            margin-top: 1rem;
         }
 
         .button-container {
@@ -71,16 +105,15 @@
             cursor: not-allowed;
         }
     </style>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
     <div class="container">
         <img src="https://upload.wikimedia.org/wikipedia/en/c/c4/Charlotte_Hornets_%282014%29.svg" alt="Charlotte Hornets Logo" class="logo">
         <div id="mode">Countdown to the Hornet's next game!!!!</div>
-        <div id="timer">Click Start to begin countdown</div>
         <div class="button-container" style="grid-template-columns: 1fr;">
             <button id="start">START COUNTDOWN</button>
         </div>
+        <div id="countdown"></div>
     </div>
     <script src="script.js"></script>
 </body>
